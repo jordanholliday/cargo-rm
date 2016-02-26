@@ -17,6 +17,7 @@ describe 'Searchable' do
   end
 
   it '#where searches with single criterion' do
+    puts Cat.include?(Searchable)
     cats = Cat.where(name: 'Breakfast')
     cat = cats.first
 
