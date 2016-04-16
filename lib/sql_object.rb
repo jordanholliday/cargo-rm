@@ -1,7 +1,5 @@
 require_relative 'db_connection'
 require 'active_support/inflector'
-# NB: the attr_accessor we wrote in phase 0 is NOT used in the rest
-# of this project. It was only a warm up.
 
 class SQLObject
   # include Searchable
@@ -50,14 +48,6 @@ class SQLObject
   end
 
   def self.parse_all(results)
-    # all_records = []
-    #
-    # results.each do |result|
-    #   all_records << self.new(result)
-    # end
-    #
-    # all_records
-
     results.map { |result| self.new(result) }
   end
 

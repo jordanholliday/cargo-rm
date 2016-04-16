@@ -1,8 +1,6 @@
-require_relative '02_searchable'
+require_relative 'searchable'
 require 'active_support/inflector'
-require 'byebug'
 
-# Phase IIIa
 class AssocOptions
   attr_accessor(
     :foreign_key,
@@ -43,7 +41,6 @@ class HasManyOptions < AssocOptions
 
     @primary_key = (  options[:primary_key] ?
                       options[:primary_key] :
-
                       :id )
     @class_name = (   options[:class_name] ?
                       options[:class_name] :
@@ -52,7 +49,6 @@ class HasManyOptions < AssocOptions
 end
 
 module Associatable
-  # Phase IIIb
   def belongs_to(name, options = {})
     # options = BelongsToOptions.new(name, options)
     assoc_options[name] = BelongsToOptions.new(name, options)
@@ -73,13 +69,35 @@ module Associatable
     define_method(name) do
       foreign_key = options.send(:foreign_key).to_s
       target_class = options.send(:model_class)
-      # debugger
       target_class.where(foreign_key => self.id)
     end
   end
 
   def assoc_options
     @assoc_options ||= {}
+  end
+
+  def has_one_through(name, through_name, source_name)
+    define_method(name) do
+      #set up options: first, get the assoc options for origin class
+      through_options = self.class.assoc_options[through_name]
+      # then call model class on those options above to get the next set of assoc options
+      source_options = through_options.model_class.assoc_options[source_name]
+      #figure out what foreign key you are looking for by sending :foreign key to
+      #through options from origin class
+      join_fk = through_options.send(:foreign_key)
+      # get the original object's id
+      origin_id = self.send(join_fk)
+      # find the join class, this step might be redundant after above
+      join_class = through_options.send(:model_class)
+      # find primary key of object in join class
+      join_object_id = join_class.where(id: origin_id).first.id
+      # find what column you're looking for in the destination class table
+      destination_fk = source_options.send(:foreign_key)
+      destination_id = join_class.where(id: origin_id).first.send(destination_fk)
+      destination_class = source_options.send(:model_class)
+      destination_class.where(id: destination_id).first
+    end
   end
 end
 
