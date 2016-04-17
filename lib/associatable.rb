@@ -51,16 +51,22 @@ end
 
 module Associatable
   def belongs_to(name, options = {})
-    # options = BelongsToOptions.new(name, options)
     assoc_options[name] = BelongsToOptions.new(name, options)
 
     define_method(name) do
-      foreign_key = options.send(:foreign_key)
+      # foreign_key = options.send(:foreign_key)
 
-      target_id = self.send(foreign_key)
-      target_class = options.send(:model_class)
+      # target_id = self.send(foreign_key)
+      # target_class = options.send(:model_class)
 
-      target_class.where(id: target_id).first
+      # target_class.find_by(id: target_id).first
+      options = self.class.assoc_options[name]
+
+      key_val = self.send(options.foreign_key)
+      options
+        .model_class
+        .find_by(options.primary_key => key_val)
+        .first
     end
   end
 
@@ -70,7 +76,7 @@ module Associatable
     define_method(name) do
       foreign_key = options.send(:foreign_key).to_s
       target_class = options.send(:model_class)
-      target_class.where(foreign_key => self.id)
+      target_class.find_by(foreign_key => self.id)
     end
   end
 
@@ -92,12 +98,12 @@ module Associatable
       # find the join class, this step might be redundant after above
       join_class = through_options.send(:model_class)
       # find primary key of object in join class
-      join_object_id = join_class.where(id: origin_id).first.id
+      join_object_id = join_class.find_by(id: origin_id).first.id
       # find what column you're looking for in the destination class table
       destination_fk = source_options.send(:foreign_key)
-      destination_id = join_class.where(id: origin_id).first.send(destination_fk)
+      destination_id = join_class.find_by(id: origin_id).first.send(destination_fk)
       destination_class = source_options.send(:model_class)
-      destination_class.where(id: destination_id).first
+      destination_class.find_by(id: destination_id).first
     end
   end
 end
