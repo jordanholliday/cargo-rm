@@ -2,11 +2,11 @@ require_relative 'db_connection'
 require_relative 'sql_object'
 
 module Searchable
-  def where(params)
-    where_line = params
-                .keys
-                .map { |key| "#{key} = ?" }
-                .join(" AND ")
+  def find_by(params)
+    query = params
+              .keys
+              .map { |key| "#{key} = ?" }
+              .join(" AND ")
 
     value_array = params.values
 
@@ -16,9 +16,10 @@ module Searchable
       FROM
         #{table_name}
       WHERE
-        #{where_line}
+        #{query}
     SQL
 
+    # drop headings before mapping
     results.drop(1).map { |result| self.new(result) }
   end
 end
