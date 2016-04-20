@@ -14,7 +14,7 @@ Add model classes as separate files in `app/models`. Declare associations much l
 # player.rb
 class Player < SQLObject
   belongs_to :team
-  has_one_through :arena, :team, :arena
+  has_one_through :arena, :team, :home_arena
 end
 ```
 
@@ -56,7 +56,7 @@ All associations and attribute accessors will be in place. Start using class met
 As a convenience, a `SeedUtil` class is included. Use `SeedUtil::csv_seed!` to save a CSV to your database:
 
 ```ruby
-> SeedUtil.csv_seed!(Model, 'path/to/csv.csv', ["column_one_name", "column_two_name", "column_three_name"])
+> SeedUtil.csv_seed!(ModelClass, 'path/to/csv.csv', ["column_one_name", "column_two_name", "column_three_name"])
 ```
 
 Note that your CSV column names should correspond to the class's attributes. Exclude the headings from the CSV file itself.
