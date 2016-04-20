@@ -37,7 +37,7 @@ If you need a new database, create one from the command line
 
     $ sqlite3 new_database.db
 
-For easy reference, the repo includes a SQL file (`basketball.sql`) with example syntax for creating tables and records. For even easier seeding, see [Seeding](#seeding) below.
+For easy reference, the repo includes a [SQL file](https://github.com/jmhol9/cargo-rm/blob/master/basketball.sql) with example syntax for creating tables and records. For even easier seeding, see [Seeding](#seeding) below.
 
 ## Booting
 
