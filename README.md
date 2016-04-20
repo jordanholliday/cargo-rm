@@ -49,7 +49,7 @@ To start your app:
 
 💣Kaboom.💣 You're ready to go.
 
-All associations and attribute accessors will be in place. Start using class methods like `.all()`, `.find()`, and `.where()`, and instance methods like `.update()` and `insert()`, right away!
+All associations and attribute accessors will be in place. Start using class methods like `.all()`, `.find()`, and `.where()`, and instance methods like `.update()` and `.insert()`, right away!
 
 ## <a name="seeding"></a>Seeding
 
