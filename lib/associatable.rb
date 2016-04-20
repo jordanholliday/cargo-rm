@@ -80,6 +80,16 @@ module Associatable
     end
   end
 
+  def has_one(name, options = {})
+    options = HasManyOptions.new(name, self, options)
+
+    define_method(name) do
+      foreign_key = options.send(:foreign_key).to_s
+      target_class = options.send(:model_class)
+      target_class.find_by(foreign_key => self.id)[0]
+    end
+  end
+
   def assoc_options
     @assoc_options ||= {}
   end

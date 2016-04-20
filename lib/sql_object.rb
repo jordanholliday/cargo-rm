@@ -5,7 +5,6 @@ require_relative 'associatable'
 require 'active_support/inflector'
 
 class SQLObject
-  # include Searchable
 
   def self.columns
     return @all_columns unless @all_columns.nil?
@@ -66,6 +65,14 @@ class SQLObject
 
     return nil if result.length != 2
     self.new(result[1])
+  end
+
+  def self.first
+    self.all[0]
+  end
+
+  def self.last
+    self.all[-1]
   end
 
   def initialize(params = {})
