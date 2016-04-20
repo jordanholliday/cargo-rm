@@ -26,7 +26,7 @@ end
 ```
 
 #### Database
-Specify your database in `config/databse.yml`:
+Specify your database in `config/database.yml`:
 
 ```yaml
 SQL_FILE: 'example.sql'
