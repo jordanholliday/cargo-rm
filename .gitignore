@@ -1,5 +1,7 @@
 .byebug_history
 .DS_Store
+cats.db
+cats.sql
 
 app
 tests
