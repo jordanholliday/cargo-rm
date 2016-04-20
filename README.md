@@ -1,7 +1,9 @@
 # Cargo-RM
 Cargo is a lightweight ORM written in Ruby.
 
-Cargo metaprogrammatically adds semantic classes and methods that translate into SQL queries. Currently, it includes single- and multi-step associations, as well as lazy, chainable queries. More features coming—watch this space!
+Cargo metaprogrammatically adds semantic classes and methods that translate into SQL queries. Currently, it includes single- and multi-step associations, as well as lazy, chainable queries.
+
+More features coming—watch this space!
 
 ## Setup
 
@@ -31,6 +33,10 @@ SQL_FILE: 'example.sql'
 DB_FILE: 'example.db'
 ```
 
+If you need a new database, create one from the command line
+
+    $ sqlite3 new_database.db
+
 For easy reference, the repo includes a SQL file (`basketball.sql`) with example syntax for creating tables and records. For even easier seeding, see [Seeding](#seeding) below.
 
 ## Booting
@@ -41,9 +47,9 @@ To start your app:
 > load 'boot.rb'
 ```
 
-💣Kaboom—💣you're ready to go.
+💣Kaboom.💣 You're ready to go.
 
-All associations and attrribute accessors will be in place. Start using class methods like `.all()`, `.find()`, and `.where()`, and instance methods like `.update()` and `insert()`, right away!
+All associations and attribute accessors will be in place. Start using class methods like `.all()`, `.find()`, and `.where()`, and instance methods like `.update()` and `insert()`, right away!
 
 ## <a name="seeding"></a>Seeding
 
