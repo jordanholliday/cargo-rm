@@ -51,7 +51,7 @@ To start your app:
 
 All associations and attribute accessors will be in place. Start using `SQLObject` [methods](#methods) right away!
 
-## <a name="methods"></a> `SQLObject`Methods
+## <a name="methods"></a> `SQLObject` Methods
 
 * `::all` - Instantiates objects for every record in the class's table, and returns them in an array.
 * `::first` - Returns an object for the first record in the class's table, when sorted by `id` ascending.
