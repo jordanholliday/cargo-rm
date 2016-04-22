@@ -53,10 +53,10 @@ All associations and attribute accessors will be in place. Start using `SQLObjec
 
 ## <a name="methods"></a> `SQLObject`Methods
 
-* `::all` - Instantiates objects for every record in class's table, and returns them in an array.
+* `::all` - Instantiates objects for every record in the class's table, and returns them in an array.
 * `::first` - Returns an object for the first record in the class's table, when sorted by `id` ascending.
-* `::last` - Returns an object for the first record in the class's table, when sorted by `id` descending.
-* `::find(id)` - Returns an object for the record corresponding to argument `id`.
+* `::last` - Returns an object for the last record in the class's table, when sorted by `id` descending.
+* `::find(id)` - Returns an object for the record with the corresponding `id`.
 * `::find_by(param)` - Queries based on a single parameter (e.g., `fname: 'Biff'`) and immediately returns the matching record(s) or `nil`.
 * `::where(params)` - Queries based on one or multiple params. Chainable and provides lazy evaluation.
 * `::has_one(name, options = {})`, ::has_many(name, options = {})`, `::belongs_to(name, options = {})` - Creates a `name` method to access associated records. As necessary, use `options` to specify a non-conventional `:primary_key`, `:foreign_key`, or `:class_name`.
