@@ -59,7 +59,7 @@ All associations and attribute accessors will be in place. Start using `SQLObjec
 * `::find(id)` - Returns an object for the record with the corresponding `id`.
 * `::find_by(param)` - Queries based on a single parameter (e.g., `fname: 'Biff'`) and immediately returns the matching record(s) or `nil`.
 * `::where(params)` - Queries based on one or multiple params. Chainable and provides lazy evaluation.
-* `::has_one(name, options = {})`, ::has_many(name, options = {})`, `::belongs_to(name, options = {})` - Creates a `name` method to access associated records. As necessary, use `options` to specify a non-conventional `:primary_key`, `:foreign_key`, or `:class_name`.
+* `::has_one(name, options = {})`, `::has_many(name, options = {})`, `::belongs_to(name, options = {})` - Creates a `name` method to access associated records. As necessary, use `options` to specify a non-conventional `:primary_key`, `:foreign_key`, or `:class_name`.
 * `::has_one_through(name, through_name, source_name)` - Creates a `name` method for accessing multistep associations.
 * `#save` - Will create new records and updated existing records. Checks `id` to determine persistence.
 * `#insert` - Creates a new record.
