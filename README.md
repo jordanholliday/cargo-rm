@@ -14,7 +14,7 @@ Add model classes as separate files in `app/models`. Declare associations much l
 # player.rb
 class Player < SQLObject
   belongs_to :team
-  has_one_through :arena, :team, :home_arena
+  has_one_through :home_arena, :team, :arena
 end
 ```
 
@@ -49,7 +49,22 @@ To start your app:
 
 💣Kaboom.💣 You're ready to go.
 
-All associations and attribute accessors will be in place. Start using class methods like `.all()`, `.find()`, and `.where()`, and instance methods like `.update()` and `.insert()`, right away!
+All associations and attribute accessors will be in place. Start using `SQLObject` [methods](#methods) right away!
+
+## <a name="methods"></a> `SQLObject`Methods
+
+* `::all` - Instantiates objects for every record in class's table, and returns them in an array.
+* `::first` - Returns an object for the first record in the class's table, when sorted by `id` ascending.
+* `::last` - Returns an object for the first record in the class's table, when sorted by `id` descending.
+* `::find(id)` - Returns an object for the record corresponding to argument `id`.
+* `::find_by(param)` - Queries based on a single parameter (e.g., `fname: 'Biff'`) and immediately returns the matching record(s) or `nil`.
+* `::where(params)` - Queries based on one or multiple params. Chainable and provides lazy evaluation.
+* `::has_one(name, options = {})`, ::has_many(name, options = {})`, `::belongs_to(name, options = {})` - Creates a `name` method to access associated records. As necessary, use `options` to specify a non-conventional `:primary_key`, `:foreign_key`, or `:class_name`.
+* `::has_one_through(name, through_name, source_name)` - Creates a `name` method for accessing multistep associations.
+* `#save` - Will create new records and updated existing records. Checks `id` to determine persistence.
+* `#insert` - Creates a new record.
+* `#update` - Saves changes to an existing record.
+* `#destroy` - Destroys an existing record.
 
 ## <a name="seeding"></a>Seeding
 
